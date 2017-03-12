@@ -1,3 +1,5 @@
+//Author: Brian Do
+
 #include <iostream>
 using namespace std;
 
@@ -7,6 +9,7 @@ class GenStack
 {
 	private:
 		E *myArray; 	//Standard array of type E
+		E *tempArray;	//Temporary array for reallocating array size.
 
 		int max;		//Used to set max array size
 		int top;		//Used to keep track of logical top of array
@@ -21,6 +24,8 @@ class GenStack
 		int getSize();
 		int isEmpty();
 		int isFull();
+
+		void expand();
 };
 
 template<class E>
@@ -35,7 +40,8 @@ template<class E>
 GenStack<E>::~GenStack()
 {
 	delete []myArray;
-	cout << "Object destroyed." << endl;
+	delete []tempArray;
+	cout << "Objects destroyed." << endl;
 }
 
 template<class E>
@@ -43,7 +49,8 @@ void GenStack<E>::push(E data)
 {
 	if(isFull() == 1)
 	{
-		cout << "The stack is full; you cannot push any more elements in." << endl;
+		expand();
+		push(data);
 	}
 	else
 	{
@@ -93,4 +100,23 @@ template<class E>
 int GenStack<E>::isFull()
 {
 	return(top == (max - 1));
+}
+
+template<class E>
+void GenStack<E>::expand()		//Expands the size of *myArray by 10 whenever called.
+{
+	tempArray = new E[max];
+
+	for(int i = top; i > -1; --i)	//Copies all values starting from top over to a temporary array.
+	{
+		tempArray[i] = myArray[i];
+	}
+
+	max += 10;						//Adds 10 more spaces to max size.
+	myArray = new E[max];
+
+	for(int i = top; i > -1; --i)	//Copies over all the elements back into bigger myArray.
+	{
+		myArray[i] = tempArray[i];
+	}
 }
