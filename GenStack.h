@@ -40,7 +40,7 @@ template<class E>
 GenStack<E>::~GenStack()
 {
 	delete []myArray;
-	delete []tempArray;
+	//delete []tempArray;
 	cout << "Objects destroyed." << endl;
 }
 
@@ -74,10 +74,7 @@ E GenStack<E>::pop()
 template<class E>
 E GenStack<E>::peek()			//Essentially same as pop() function but without changing the value of top.
 {
-	if(top == -1)
-	{
-		cout << "The stack is empty; there is nothing to peek." << endl;
-	}
+	if(top == -1) {}
 	else
 	{
 		return myArray[top];
