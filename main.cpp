@@ -5,7 +5,17 @@
 
 using namespace std;
 
+int delimiterCheck(int argc, char ** argv);
+
 int main(int argc, char ** argv)
+{
+	delimiterCheck(argc, argv);
+
+	return 0;
+}
+
+
+int delimiterCheck(int argc, char ** argv)
 {
 	bool keepGoing = true;
 
@@ -20,7 +30,7 @@ int main(int argc, char ** argv)
 
 		while(keepGoing)
 		{
-			cout << "File name: " << fileName << endl;
+			cout << endl << "File name: " << fileName << endl;
 
 			string text;
 			int lineNum = 1;
@@ -103,5 +113,6 @@ int main(int argc, char ** argv)
 			}
 		}
 	}
+
 	return 0;
 }
