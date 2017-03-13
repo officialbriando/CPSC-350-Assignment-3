@@ -34,13 +34,15 @@ GenStack<E>::GenStack(int maxSize)
 	myArray = new E[maxSize];
 	max = maxSize;
 	top = -1;
+
+	tempArray = new E[max]; 	//Necessary to create tempArray so that deletion of it later does not abort core.
 }
 
 template<class E>
 GenStack<E>::~GenStack()
 {
 	delete []myArray;
-	//delete []tempArray;
+	delete []tempArray;
 	cout << "Objects destroyed." << endl;
 }
 
